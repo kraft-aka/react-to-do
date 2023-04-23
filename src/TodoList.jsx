@@ -1,29 +1,22 @@
-const TodoList = ({ todos }) => {
-  return ( 
+import TodoItem from "./TodoItem";
+
+const TodoList = ({ todos, toggleTodo, deleteTodo }) => {
+
+  return (
     <ul className="list">
-        {todos.length === 0 && 'No todos yet!'}
-        {todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <label htmlFor="">
-                <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={(e) => toggleTodo(todo.id, e.target.checked)}
-                />
-                {todo.title}
-              </label>
-              <button
-                onClick={() => deleteTodo(todo.id)}
-                className="btn btn-danger"
-              >
-                Delete
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-   );
-}
- 
+      {todos.length === 0 && "No todos yet!"}
+      {todos.map((todo) => {
+        return (
+          <TodoItem
+            {...todo}
+            key={todo.id}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
+          />
+        );
+      })}
+    </ul>
+  );
+};
+
 export default TodoList;
